@@ -13,15 +13,15 @@
 #include <QWebView>
 #include <QWebFrame>
 #include "novile_debug.h"
-#include "sourceeditor.h"
+#include "editor.h"
 
 namespace Novile
 {
 
-class SourceEditorPrivate
+class EditorPrivate
 {
 public:
-    SourceEditorPrivate(SourceEditor *p = 0) :
+    EditorPrivate(Editor *p = 0) :
         parent(p),
         aceView(new QWebView(p)),
         layout(new QVBoxLayout(p))
@@ -31,30 +31,29 @@ public:
         layout->setMargin(0);
     }
 
-    ~SourceEditorPrivate()
+    ~EditorPrivate()
     {
     }
 
     void loadAceView()
     {
-
         aceView->setUrl(QUrl("qrc:/html/ace.html"));
     }
 
 private:
-    SourceEditor *parent;
+    Editor *parent;
     QWebView *aceView;
     QVBoxLayout *layout;
 };
 
-SourceEditor::SourceEditor(QWidget *parent) :
+Editor::Editor(QWidget *parent) :
     QWidget(parent),
-    d(new SourceEditorPrivate(this))
+    d(new EditorPrivate(this))
 {
     d->loadAceView();
 }
 
-SourceEditor::~SourceEditor()
+Editor::~Editor()
 {
 }
 

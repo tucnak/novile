@@ -8,8 +8,8 @@
  *
  */
 
-#ifndef SOURCEEDITOR_H
-#define SOURCEEDITOR_H
+#ifndef EDITOR_H
+#define EDITOR_H
 
 #include <QWidget>
 #include "novile_export.h"
@@ -17,19 +17,19 @@
 namespace Novile
 {
 
-class SourceEditorPrivate;
-class NOVILE_EXPORT SourceEditor : public QWidget
+class EditorPrivate;
+class NOVILE_EXPORT Editor : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SourceEditor(QWidget *parent = 0);
-    ~SourceEditor();
+    explicit Editor(QWidget *parent = 0);
+    ~Editor();
 
 private:
-    SourceEditorPrivate * const d;
+    EditorPrivate * const d;
     
 };
 
 } // namespace Novile
 
-#endif // SOURCEEDITOR_H
+#endif // EDITOR_H

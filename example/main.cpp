@@ -9,7 +9,7 @@
  */
 
 #include <QApplication>
-#include <sourceeditor.h>
+#include <editor.h>
 
 using namespace Novile;
 
@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    SourceEditor editor;
+    Editor editor;
     editor.setGeometry(100, 50, 1000, 600);
     editor.show();
 

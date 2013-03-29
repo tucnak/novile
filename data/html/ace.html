@@ -6,8 +6,6 @@
 
     <script src="qrc:/jquery/latest.js" type="text/javascript"></script>
     <script src="qrc:/ace/ace.js" type="text/javascript"></script>
-    <script src="qrc:/ace/mode-c_cpp.js" type="text/javascript"></script>
-    <script src="qrc:/ace/theme-github.js" type="text/javascript"></script>
 
     <style type="text/css" media="screen">
         #editor {
@@ -21,11 +19,8 @@
 </head>
 <body>
     <div id="editor"></div>
-
     <script>
         var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/javascript");
     </script>
 </body>
 </html>
