@@ -22,8 +22,32 @@ class NOVILE_EXPORT Editor : public QWidget
 {
     Q_OBJECT
 public:
+    enum HighlightMode {
+        ModeCpp = 0,
+        ModeCss,
+        ModeHtml,
+        ModeJavaScript,
+        ModePascal,
+        ModePhp,
+        ModePython,
+        ModeRuby,
+        ModeXml
+    };
+
+    enum Theme {
+        ThemeAmbiance = 0,
+        ThemeMonokai,
+        ThemeTextMate
+    };
+
     explicit Editor(QWidget *parent = 0);
     ~Editor();
+
+    void setHighlightMode(HighlightMode mode);
+    void setHighlightMode(const QString &name, const QUrl &url);
+
+    void setTheme(Theme theme);
+    void setTheme(const QString &name, const QUrl &url);
 
 private:
     EditorPrivate * const d;

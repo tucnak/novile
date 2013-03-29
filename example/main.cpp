@@ -9,7 +9,7 @@
  */
 
 #include <QApplication>
-#include <editor.h>
+#include "editor.h"
 
 using namespace Novile;
 
@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
     Editor editor;
     editor.setGeometry(100, 50, 1000, 600);
     editor.show();
+    editor.setHighlightMode(Editor::ModePascal);
+    editor.setTheme(Editor::ThemeMonokai);
 
     return app.exec();
 }

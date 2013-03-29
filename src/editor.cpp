@@ -8,7 +8,8 @@
  *
  */
 
-#include <QtCore>
+#include <QEventLoop>
+#include <QString>
 #include <QVBoxLayout>
 #include <QWebView>
 #include <QWebFrame>
@@ -37,10 +38,14 @@ public:
 
     void loadAceView()
     {
-        aceView->setUrl(QUrl("qrc:/html/ace.html"));
+        QEventLoop loop(parent);
+        QObject::connect(aceView, &QWebView::loadFinished,
+                         &loop, &QEventLoop::quit);
+        aceView->load(QUrl("qrc:/html/ace.html"));
+        loop.exec();
     }
 
-private:
+public:
     Editor *parent;
     QWebView *aceView;
     QVBoxLayout *layout;
@@ -55,6 +60,72 @@ Editor::Editor(QWidget *parent) :
 
 Editor::~Editor()
 {
+}
+
+void Editor::setHighlightMode(HighlightMode mode)
+{
+    switch(mode) {
+    case ModeCpp:
+        setHighlightMode(QString("c_cpp"), QUrl("qrc:/ace/mode-c_cpp.js"));
+        return;
+    case ModeCss:
+        setHighlightMode(QString("css"), QUrl("qrc:/ace/mode-css.js"));
+        return;
+    case ModeHtml:
+        setHighlightMode(QString("html"), QUrl("qrc:/ace/mode-html.js"));
+        return;
+    case ModeJavaScript:
+        setHighlightMode(QString("javascript"), QUrl("qrc:/ace/mode-javascript.js"));
+        return;
+    case ModePascal:
+        setHighlightMode(QString("pascal"), QUrl("qrc:/ace/mode-pascal.js"));
+        return;
+    case ModePhp:
+        setHighlightMode(QString("php"), QUrl("qrc:/ace/mode-php.js"));
+        return;
+    case ModePython:
+        setHighlightMode(QString("python"), QUrl("qrc:/ace/mode-python.js"));
+        return;
+    case ModeRuby:
+        setHighlightMode(QString("ruby"), QUrl("qrc:/ace/mode-ruby.js"));
+        return;
+    case ModeXml:
+        setHighlightMode(QString("xml"), QUrl("qrc:/ace/mode-xml.js"));
+        return;
+    }
+}
+
+void Editor::setHighlightMode(const QString &name, const QUrl &url)
+{
+    const QString request = ""
+            "$.getScript('"+url.toString()+"');"
+            "editor.getSession().setMode('ace/mode/"+name+"');";
+
+    d->aceView->page()->mainFrame()->evaluateJavaScript(request);
+}
+
+void Editor::setTheme(Theme theme)
+{
+    switch(theme) {
+    case ThemeAmbiance:
+        setTheme(QString("ambiance"), QUrl("qrc:/ace/theme-ambiance.js"));
+        return;
+    case ThemeMonokai:
+        setTheme(QString("monokai"), QUrl("qrc:/ace/theme-monokai.js"));
+        return;
+    case ThemeTextMate:
+        setTheme(QString("textmate"), QUrl("qrc:/ace/theme-textmate.js"));
+        return;
+    }
+}
+
+void Editor::setTheme(const QString &name, const QUrl &url)
+{
+    const QString request = ""
+            "$.getScript('"+url.toString()+"');"
+            "editor.setTheme('ace/theme/"+name+"');";
+
+    d->aceView->page()->mainFrame()->evaluateJavaScript(request);
 }
 
 } // namespace Novile

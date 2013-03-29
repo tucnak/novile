@@ -19,5 +19,5 @@ set(EXAMPLE_SOURCES main.cpp)
 
 add_executable(example ${EXAMPLE_SOURCES})
 target_link_libraries(example novile)
-include_directories(${CMAKE_INSTALL_PREFIX}/include)
+include_directories(${CMAKE_SOURCE_DIR}/src)
 qt5_use_modules(example WebKitWidgets)
