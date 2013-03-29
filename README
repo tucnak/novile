@@ -1,0 +1,11 @@
+Novile Editor
+=============
+
+Novile is an editor for Qt 5, based on Ace editor from ajax.org. It allows to extend your application with pretty source code editor, full of features.
+
+If you ask us to describe it in 5 words, we will say: beautiful, powerful, extensible, light-weight and just awesome. Created with Qt 5, created for Qt 5 - Novile offers the biggest cross-platform power you can even think about. Enjoy it!
+
+Useful links:
+=============
+http://ace.ajax.org/ - Ace Editor
+https://github.com/tucnak - Author of the library
