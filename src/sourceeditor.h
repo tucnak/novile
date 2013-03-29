@@ -1,21 +1,22 @@
 #ifndef SOURCEEDITOR_H
 #define SOURCEEDITOR_H
 
+#include <QWidget>
 #include "novile_export.h"
-#include <QObject>
 
 namespace Novile
 {
 
-class NOVILE_EXPORT SourceEditor : public QObject
+class SourceEditorPrivate;
+class NOVILE_EXPORT SourceEditor : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SourceEditor(QObject *parent = 0);
-    
-signals:
-    
-public slots:
+    explicit SourceEditor(QWidget *parent = 0);
+    ~SourceEditor();
+
+private:
+    SourceEditorPrivate * const d;
     
 };
 

@@ -43,6 +43,6 @@
         <file>ace/theme-solarized_light.js</file>
         <file>ace/theme-textmate.js</file>
         <file>ace/theme-xcode.js</file>
-        <file>jquery/jquery-1.9.1.min.js</file>
+        <file alias="jquery/latest.js">jquery/jquery-1.9.1.min.js</file>
     </qresource>
 </RCC>

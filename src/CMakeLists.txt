@@ -24,12 +24,16 @@ set(NOVILE_MOC_HEADERS
 
 set(NOVILE_RESOURCES
     ../shared/shared.qrc
+    html/html.qrc
 )
 
-add_library(novile SHARED ${NOVILE_SOURCES} ${NOVILE_HEADERS} ${NOVILE_MOC_HEADERS})
-target_link_libraries(novile ${Qt5WebKit_LIBRARIES})
-qt5_use_modules(novile WebKit)
-qt5_add_resources(novile ${NOVILE_RESOURCES})
+qt5_add_resources(${NOVILE_RCC_SRC} ${NOVILE_RESOURCES})
+add_library(novile SHARED ${NOVILE_SOURCES}
+                          ${NOVILE_HEADERS}
+                          ${NOVILE_MOC_HEADERS}
+                          ${NOVILE_RESOURCES}
+                          ${NOVILE_RCC_SRC})
+qt5_use_modules(novile WebKitWidgets)
 
 set_target_properties(novile PROPERTIES
     DEFINE_SYMBOL NOVILE_MAKEDLL

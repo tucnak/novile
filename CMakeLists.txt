@@ -13,19 +13,23 @@ cmake_minimum_required(VERSION 2.8.8)
 project(novile)
 
 if(VERBOSE_OUTPUT)
-	message(STATUS "Executable will contain verbose output")
-	add_definitions("-DNOVILE_VERBOSE_OUTPUT")
+    message(STATUS "Library will contain verbose output")
+    add_definitions("-DNOVILE_VERBOSE_OUTPUT")
 endif(VERBOSE_OUTPUT)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt5WebKit REQUIRED)
+find_package(Qt5WebKitWidgets REQUIRED)
 
 set(NOVILE_BUILD_DIRECTORY "${CMAKE_SOURCE_DIR}/lib")
 set(LIBRARY_OUTPUT_PATH  "${NOVILE_BUILD_DIRECTORY}")
 set(LIBRARY_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${LIBRARY_INSTALL_PATH}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
 
 add_subdirectory(src)
+
+if(BUILD_EXAMPLE)
+    add_subdirectory(example)
+    message(STATUS "Example application will be built")
+endif(BUILD_EXAMPLE)
