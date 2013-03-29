@@ -22,7 +22,7 @@ set(NOVILE_MOC_HEADERS
     sourceeditor.h
 )
 
-qt5_add_resources(${NOVILE_RCC_SRC} ../data/shared.qrc)
+qt5_add_resources(NOVILE_RCC_SRC ../data/shared.qrc)
 add_library(novile SHARED ${NOVILE_SOURCES}
                           ${NOVILE_HEADERS}
                           ${NOVILE_MOC_HEADERS}

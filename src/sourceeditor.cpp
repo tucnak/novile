@@ -11,6 +11,7 @@
 #include <QtCore>
 #include <QVBoxLayout>
 #include <QWebView>
+#include <QWebFrame>
 #include "novile_debug.h"
 #include "sourceeditor.h"
 
@@ -27,6 +28,7 @@ public:
     {
         parent->setLayout(layout);
         layout->addWidget(aceView);
+        layout->setMargin(0);
     }
 
     ~SourceEditorPrivate()
@@ -35,7 +37,8 @@ public:
 
     void loadAceView()
     {
-        aceView->setUrl(QUrl(":/html/ace.html"));
+
+        aceView->setUrl(QUrl("qrc:/html/ace.html"));
     }
 
 private:
@@ -49,8 +52,6 @@ SourceEditor::SourceEditor(QWidget *parent) :
     d(new SourceEditorPrivate(this))
 {
     d->loadAceView();
-
-    mDebug() << QDir(":/").entryList();
 }
 
 SourceEditor::~SourceEditor()
