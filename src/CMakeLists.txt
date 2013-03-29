@@ -22,17 +22,12 @@ set(NOVILE_MOC_HEADERS
     sourceeditor.h
 )
 
-set(NOVILE_RESOURCES
-    ../shared/shared.qrc
-    html/html.qrc
-)
-
-qt5_add_resources(${NOVILE_RCC_SRC} ${NOVILE_RESOURCES})
+qt5_add_resources(${NOVILE_RCC_SRC} ../data/shared.qrc)
 add_library(novile SHARED ${NOVILE_SOURCES}
                           ${NOVILE_HEADERS}
                           ${NOVILE_MOC_HEADERS}
-                          ${NOVILE_RESOURCES}
-                          ${NOVILE_RCC_SRC})
+                          ${NOVILE_RCC_SRC}
+                          ../data/shared.qrc)
 qt5_use_modules(novile WebKitWidgets)
 
 set_target_properties(novile PROPERTIES

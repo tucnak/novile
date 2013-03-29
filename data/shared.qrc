@@ -44,5 +44,6 @@
         <file>ace/theme-textmate.js</file>
         <file>ace/theme-xcode.js</file>
         <file alias="jquery/latest.js">jquery/jquery-1.9.1.min.js</file>
+        <file>html/ace.html</file>
     </qresource>
 </RCC>

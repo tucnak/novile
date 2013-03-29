@@ -35,7 +35,7 @@ public:
 
     void loadAceView()
     {
-        aceView->setUrl(QUrl(":/ace.html"));
+        aceView->setUrl(QUrl(":/html/ace.html"));
     }
 
 private:
