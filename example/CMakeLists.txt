@@ -17,7 +17,7 @@ find_package(Qt5WebKitWidgets REQUIRED)
 
 set(EXAMPLE_SOURCES main.cpp)
 
-set(FILES_IMPORT ../src/sourceeditor.cpp)
-
-add_executable(example ${EXAMPLE_SOURCES} ${FILES_IMPORT})
+add_executable(example ${EXAMPLE_SOURCES})
+target_link_libraries(example novile)
+include_directories(${CMAKE_INSTALL_PREFIX}/include)
 qt5_use_modules(example WebKitWidgets)

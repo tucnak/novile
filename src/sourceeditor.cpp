@@ -49,6 +49,8 @@ SourceEditor::SourceEditor(QWidget *parent) :
     d(new SourceEditorPrivate(this))
 {
     d->loadAceView();
+
+    mDebug() << QDir(":/").entryList();
 }
 
 SourceEditor::~SourceEditor()
