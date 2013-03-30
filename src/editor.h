@@ -22,31 +22,73 @@ class NOVILE_EXPORT Editor : public QWidget
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Default highlight lexers
+     */
     enum HighlightMode {
+        /// C++ programming language
         ModeCpp = 0,
+        /// CSS markup language
         ModeCss,
+        /// HTML markup language
         ModeHtml,
+        /// JavaScript scripting language
         ModeJavaScript,
+        /// Pascal programming language
         ModePascal,
+        /// PHP scripting language
         ModePhp,
+        /// Python programming language
         ModePython,
+        /// Ruby programming language
         ModeRuby,
+        /// XML markup language
         ModeXml
     };
 
+    /**
+     * @brief Default editor themes
+     */
     enum Theme {
+        /// Ambiance-style theme
         ThemeAmbiance = 0,
+        /// Monokai-style theme
         ThemeMonokai,
+        /// Textmate-style theme
         ThemeTextMate
     };
 
+    /**
+     * @brief Regular constructor
+     * @param parent widget, used as parent
+     */
     explicit Editor(QWidget *parent = 0);
     ~Editor();
 
+    /**
+     * @brief Set default syntax highlighter lexer
+     * @param mode lexer entry from @see HighlightMode
+     */
     void setHighlightMode(HighlightMode mode);
+
+    /**
+     * @brief Set specific syntax highlighter lexer
+     * @param name string, set into "ace/mode/$name"
+     * @param url lexer javascript source url
+     */
     void setHighlightMode(const QString &name, const QUrl &url);
 
+    /**
+     * @brief Set default editor theme
+     * @param theme entry from @see Theme
+     */
     void setTheme(Theme theme);
+
+    /**
+     * @brief Set specific editor theme
+     * @param name string, set into "ace/theme/$name"
+     * @param url theme javascript source url
+     */
     void setTheme(const QString &name, const QUrl &url);
 
 private:

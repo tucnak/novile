@@ -1,0 +1,20 @@
+Installation guide
+==================
+
+Novile is built with CMake build system (2.8.8+) just because CMake is the best variant for shared libraries like this. You should create subdirectory, e.g. build. Everything you will do there.
+
+There are few cmake build keys and switchers, you should use:
+
+    * -DCMAKE_BUILD_TYPE=Release (you should set Debug if you want debug build)
+    * -DCMAKE_INSTALL_PREFIX=$HOME/Software/novile (or another path, you want)
+    * -DVERBOSE_OUTPUT=No (or Yes, if you want to get debug console output)
+    * -DBUILD_DOCS=Yes (or No, if you don't want to build Doxygen API docs)
+    * -DBUILD_EXAMPLE=Yes (or No, if you don't want to try live example)
+
+So, for regular user it would be like:
+
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/Software/novile
+
+And for (Novile) Developer:
+
+    cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$HOME/Software/novile -DVERBOSE_OUTPUT=Yes -DBUILD_DOCS=Yes -DBUILD_EXAMPLE=Yes

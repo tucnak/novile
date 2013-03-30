@@ -27,7 +27,8 @@ add_library(novile SHARED ${NOVILE_SOURCES}
                           ${NOVILE_HEADERS}
                           ${NOVILE_MOC_HEADERS}
                           ${NOVILE_RCC_SRC}
-                          ../data/shared.qrc)
+                          ../data/shared.qrc
+)
 qt5_use_modules(novile WebKitWidgets)
 
 set_target_properties(novile PROPERTIES
