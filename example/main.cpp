@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
     editor.show();
     editor.setHighlightMode(Editor::ModeCpp);
     editor.setTheme(Editor::ThemeTextMate);
+    editor.hidePrintMargin();
+    editor.setFontSize(13);
 
     return app.exec();
 }

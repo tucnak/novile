@@ -150,18 +150,40 @@ void Editor::setText(const QString &newText)
 
 bool Editor::isReadOnly() const
 {
-    return d->executeJavaScript("property('readonly')").toBool();
+    return d->executeJavaScript("editor.getReadOnly()").toBool();
 }
 
 void Editor::setReadOnly(bool readOnly)
 {
     if (readOnly) {
-        d->executeJavaScript("property('readonly', true);"
-                             "editor.setReadOnly(true);");
+        d->executeJavaScript("editor.setReadOnly(true)");
     } else {
-        d->executeJavaScript("property('readonly', false)"
-                             "editor.setReadOnly(false);");
+        d->executeJavaScript("editor.setReadOnly(false)");
     }
+}
+
+void Editor::showPrintMargin()
+{
+    d->executeJavaScript("editor.setShowPrintMargin(true)");
+}
+
+void Editor::hidePrintMargin()
+{
+    d->executeJavaScript("editor.setShowPrintMargin(false)");
+}
+
+int Editor::fontSize()
+{
+    return  d->executeJavaScript("document.getElementById('editor').style.fontSize")
+            .toString()
+            .replace("px", "")
+            .toInt();
+}
+
+void Editor::setFontSize(int px)
+{
+    d->executeJavaScript("document.getElementById('editor').style.fontSize='" +
+                         QString::number(px) + "px';");
 }
 
 void Editor::setHighlightMode(HighlightMode mode)

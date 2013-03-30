@@ -27,8 +27,9 @@ class EditorPrivate;
 class NOVILE_EXPORT Editor : public QWidget
 {
     Q_OBJECT
-    Q_PROPERTY(int lines READ lines NOTIFY linesChanged)
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(int lines READ lines NOTIFY linesChanged)
+    Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize)
     Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
 public:
     /**
@@ -109,6 +110,28 @@ public:
      * @param readOnly yes or not
      */
     void setReadOnly(bool readOnly);
+
+    /**
+     * @brief Show print margin (semi-transparent line at right)
+     */
+    void showPrintMargin();
+
+    /**
+     * @brief Hide print margin (semi-transparent line at right)
+     */
+    void hidePrintMargin();
+
+    /**
+     * @brief Font size of the source text
+     * @return size in pixels
+     */
+    int fontSize();
+
+    /**
+     * @brief Set font size in pixels
+     * @param px size in pixels
+     */
+    void setFontSize(int px);
 
     /**
      * @brief Set default syntax highlighter lexer
