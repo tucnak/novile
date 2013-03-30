@@ -18,6 +18,12 @@ namespace Novile
 {
 
 class EditorPrivate;
+
+/**
+ * @brief The Editor class
+ *
+ * Editor class implements top-level wrapper, based on Qt for Ace editor
+ */
 class NOVILE_EXPORT Editor : public QWidget
 {
     Q_OBJECT

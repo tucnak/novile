@@ -17,10 +17,19 @@
 namespace Novile
 {
 
+/**
+ * @brief The EditorPrivate class
+ *
+ * EditorPrivate class represents low-level wrapper for Ace editor and background of @see Editor
+ */
 class EditorPrivate: public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Regular constructor
+     * @param p editor object (will be used like Q-pointer)
+     */
     EditorPrivate(Editor *p = 0) :
         QObject(),
         parent(p),
@@ -39,11 +48,19 @@ public:
     {
     }
 
+    /**
+     * @brief Run some JS code to Ace
+     * @param code javascript source
+     * @return evaluation result
+     */
     QVariant executeJavaScript(const QString &code)
     {
         return aceView->page()->mainFrame()->evaluateJavaScript(code);
     }
 
+    /**
+     * @brief Start Ace web widget and load javascript low-level helpers
+     */
     void startAceWidget()
     {
         QEventLoop loop(parent);
@@ -62,12 +79,19 @@ public:
     }
 
 public slots:
+    /**
+     * @brief Provider for @see Editor::linesChanged()
+     * @param lines new number of rows
+     */
     void onLinesChanged(int lines)
     {
         emit linesChanged(lines);
     }
 
 signals:
+    /**
+     * @brief Intermediate signal for @see Editor::linesChanged()
+     */
     void linesChanged(int);
 
 public:
