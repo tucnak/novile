@@ -10,8 +10,14 @@
 
 #include <QApplication>
 #include "editor.h"
+#include "novile_debug.h"
 
 using namespace Novile;
+
+void linesChanged(int lines)
+{
+    mDebug() << "[App] lines:" << lines;
+}
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +28,9 @@ int main(int argc, char *argv[])
     editor.show();
     editor.setHighlightMode(Editor::ModePascal);
     editor.setTheme(Editor::ThemeMonokai);
+
+    QObject::connect(&editor, &Editor::linesChanged,
+                     &linesChanged);
 
     return app.exec();
 }

@@ -21,6 +21,7 @@ class EditorPrivate;
 class NOVILE_EXPORT Editor : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(READ lines NOTIFY linesChanged)
 public:
     /**
      * @brief Default highlight lexers
@@ -66,6 +67,12 @@ public:
     ~Editor();
 
     /**
+     * @brief Number of source lines
+     * @return lines in the source
+     */
+    int lines() const;
+
+    /**
      * @brief Set default syntax highlighter lexer
      * @param mode lexer entry from @see HighlightMode
      */
@@ -91,9 +98,14 @@ public:
      */
     void setTheme(const QString &name, const QUrl &url);
 
+signals:
+    /**
+     * @brief New number of lines in the document
+     */
+    void linesChanged(int);
+
 private:
     EditorPrivate * const d;
-    
 };
 
 } // namespace Novile

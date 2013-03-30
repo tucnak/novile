@@ -8,21 +8,21 @@
  *
  */
 
-#include <QEventLoop>
-#include <QString>
+#include <QtCore>
 #include <QVBoxLayout>
-#include <QWebView>
-#include <QWebFrame>
+#include <QtWebKitWidgets>
 #include "novile_debug.h"
 #include "editor.h"
 
 namespace Novile
 {
 
-class EditorPrivate
+class EditorPrivate: public QObject
 {
+    Q_OBJECT
 public:
     EditorPrivate(Editor *p = 0) :
+        QObject(),
         parent(p),
         aceView(new QWebView(p)),
         layout(new QVBoxLayout(p))
@@ -30,20 +30,45 @@ public:
         parent->setLayout(layout);
         layout->addWidget(aceView);
         layout->setMargin(0);
+
+        connect(this, &EditorPrivate::linesChanged,
+                parent, &Editor::linesChanged);
     }
 
     ~EditorPrivate()
     {
     }
 
-    void loadAceView()
+    QVariant executeJavaScript(const QString &code)
+    {
+        return aceView->page()->mainFrame()->evaluateJavaScript(code);
+    }
+
+    void startAceWidget()
     {
         QEventLoop loop(parent);
         QObject::connect(aceView, &QWebView::loadFinished,
                          &loop, &QEventLoop::quit);
         aceView->load(QUrl("qrc:/html/ace.html"));
         loop.exec();
+
+        // Wrapper (data/wrapper.js)
+        QWebFrame *frame = aceView->page()->mainFrame();
+        frame->addToJavaScriptWindowObject("Novile", this);
+
+        QFile listeners(":/html/wrapper.js");
+        if (listeners.open(QIODevice::ReadOnly))
+            executeJavaScript(listeners.readAll());
     }
+
+public slots:
+    void onLinesChanged(int lines)
+    {
+        emit linesChanged(lines);
+    }
+
+signals:
+    void linesChanged(int);
 
 public:
     Editor *parent;
@@ -55,11 +80,16 @@ Editor::Editor(QWidget *parent) :
     QWidget(parent),
     d(new EditorPrivate(this))
 {
-    d->loadAceView();
+    d->startAceWidget();
 }
 
 Editor::~Editor()
 {
+}
+
+int Editor::lines() const
+{
+    return d->executeJavaScript("property('lines')").toInt();
 }
 
 void Editor::setHighlightMode(HighlightMode mode)
@@ -101,7 +131,7 @@ void Editor::setHighlightMode(const QString &name, const QUrl &url)
             "$.getScript('"+url.toString()+"');"
             "editor.getSession().setMode('ace/mode/"+name+"');";
 
-    d->aceView->page()->mainFrame()->evaluateJavaScript(request);
+    d->executeJavaScript(request);
 }
 
 void Editor::setTheme(Theme theme)
@@ -125,7 +155,9 @@ void Editor::setTheme(const QString &name, const QUrl &url)
             "$.getScript('"+url.toString()+"');"
             "editor.setTheme('ace/theme/"+name+"');";
 
-    d->aceView->page()->mainFrame()->evaluateJavaScript(request);
+    d->executeJavaScript(request);
 }
 
 } // namespace Novile
+
+#include "editor.moc"
