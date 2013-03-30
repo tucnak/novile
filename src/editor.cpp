@@ -145,6 +145,23 @@ QString Editor::text() const
 void Editor::setText(const QString &newText)
 {
     d->executeJavaScript("editor.setValue('"+newText+"')");
+    d->executeJavaScript("editor.selection.clearSelection()");
+}
+
+bool Editor::isReadOnly() const
+{
+    return d->executeJavaScript("property('readonly')").toBool();
+}
+
+void Editor::setReadOnly(bool readOnly)
+{
+    if (readOnly) {
+        d->executeJavaScript("property('readonly', true);"
+                             "editor.setReadOnly(true);");
+    } else {
+        d->executeJavaScript("property('readonly', false)"
+                             "editor.setReadOnly(false);");
+    }
 }
 
 void Editor::setHighlightMode(HighlightMode mode)

@@ -29,6 +29,7 @@ class NOVILE_EXPORT Editor : public QWidget
     Q_OBJECT
     Q_PROPERTY(int lines READ lines NOTIFY linesChanged)
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
 public:
     /**
      * @brief Default highlight lexers
@@ -96,6 +97,18 @@ public:
      * @param newText new source code
      */
     void setText(const QString &newText);
+
+    /**
+     * @brief Can we edit or not?
+     * @return can or not
+     */
+    bool isReadOnly() const;
+
+    /**
+     * @brief Allow edit or not
+     * @param readOnly yes or not
+     */
+    void setReadOnly(bool readOnly);
 
     /**
      * @brief Set default syntax highlighter lexer

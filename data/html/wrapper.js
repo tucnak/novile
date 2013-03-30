@@ -20,6 +20,7 @@ function property(param, value) {
 
 property("lines", 1);
 property("text", "");
+property("readonly", false);
 
 // If document changed
 editor.on('change', function() {
