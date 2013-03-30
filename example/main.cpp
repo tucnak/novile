@@ -14,23 +14,16 @@
 
 using namespace Novile;
 
-void linesChanged(int lines)
-{
-    mDebug() << "[App] lines:" << lines;
-}
-
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
     Editor editor;
+    editor.setWindowTitle("Novile Demonstration");
     editor.setGeometry(100, 50, 1000, 600);
     editor.show();
-    editor.setHighlightMode(Editor::ModePascal);
-    editor.setTheme(Editor::ThemeMonokai);
-
-    QObject::connect(&editor, &Editor::linesChanged,
-                     &linesChanged);
+    editor.setHighlightMode(Editor::ModeCpp);
+    editor.setTheme(Editor::ThemeTextMate);
 
     return app.exec();
 }

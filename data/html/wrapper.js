@@ -19,6 +19,7 @@ function property(param, value) {
 }
 
 property("lines", 1);
+property("text", "");
 
 // If document changed
 editor.on('change', function() {
@@ -26,5 +27,11 @@ editor.on('change', function() {
     if (newLines != property("lines")) {
         property("lines", newLines);
         Novile.onLinesChanged(newLines);
+    }
+
+    var newText = editor.getValue();
+    if (newText != property("text")) {
+        property("text", newText);
+        Novile.onTextChanged();
     }
 });

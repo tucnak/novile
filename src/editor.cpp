@@ -42,6 +42,9 @@ public:
 
         connect(this, &EditorPrivate::linesChanged,
                 parent, &Editor::linesChanged);
+
+        connect(this, &EditorPrivate::textChanged,
+                parent, &Editor::textChanged);
     }
 
     ~EditorPrivate()
@@ -80,7 +83,7 @@ public:
 
 public slots:
     /**
-     * @brief Provider for @see Editor::linesChanged()
+     * @brief Provider for @see linesChanged()
      * @param lines new number of rows
      */
     void onLinesChanged(int lines)
@@ -88,11 +91,24 @@ public slots:
         emit linesChanged(lines);
     }
 
+    /**
+     * @brief Provider for @see textChanged()
+     */
+    void onTextChanged()
+    {
+        emit textChanged();
+    }
+
 signals:
     /**
      * @brief Intermediate signal for @see Editor::linesChanged()
      */
     void linesChanged(int);
+
+    /**
+     * @brief Intermediate signal for @see Editor::textChanged()
+     */
+    void textChanged();
 
 public:
     Editor *parent;
@@ -114,6 +130,21 @@ Editor::~Editor()
 int Editor::lines() const
 {
     return d->executeJavaScript("property('lines')").toInt();
+}
+
+void Editor::gotoLine(int lineNumber) const
+{
+    d->executeJavaScript("editor.gotoLine("+QString::number(lineNumber)+")");
+}
+
+QString Editor::text() const
+{
+    return d->executeJavaScript("property('text')").toString();
+}
+
+void Editor::setText(const QString &newText)
+{
+    d->executeJavaScript("editor.setValue('"+newText+"')");
 }
 
 void Editor::setHighlightMode(HighlightMode mode)

@@ -27,7 +27,8 @@ class EditorPrivate;
 class NOVILE_EXPORT Editor : public QWidget
 {
     Q_OBJECT
-    Q_PROPERTY(READ lines NOTIFY linesChanged)
+    Q_PROPERTY(int lines READ lines NOTIFY linesChanged)
+    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
 public:
     /**
      * @brief Default highlight lexers
@@ -79,6 +80,24 @@ public:
     int lines() const;
 
     /**
+     * @brief Changes cursor position (=row) to set
+     * @param lineNumber new cursor's row
+     */
+    void gotoLine(int lineNumber) const;
+
+    /**
+     * @brief Source code from editor
+     * @return source code
+     */
+    QString text() const;
+
+    /**
+     * @brief Set source code for editor
+     * @param newText new source code
+     */
+    void setText(const QString &newText);
+
+    /**
      * @brief Set default syntax highlighter lexer
      * @param mode lexer entry from @see HighlightMode
      */
@@ -109,6 +128,11 @@ signals:
      * @brief New number of lines in the document
      */
     void linesChanged(int);
+
+    /**
+     * @brief New text of the document
+     */
+    void textChanged();
 
 private:
     EditorPrivate * const d;
