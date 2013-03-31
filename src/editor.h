@@ -76,6 +76,21 @@ public:
     ~Editor();
 
     /**
+     * @brief Copy selected text to the buffer
+     */
+    void copy();
+
+    /**
+     * @brief Paste text from the buffer to the editor
+     */
+    void paste();
+
+    /**
+     * @brief Cut selected text to the buffer
+     */
+    void cut();
+
+    /**
      * @brief Number of source lines
      * @return lines in the source
      */
@@ -158,6 +173,9 @@ public:
      * @param url theme javascript source url
      */
     void setTheme(const QString &name, const QUrl &url);
+
+protected:
+    bool eventFilter(QObject *object, QEvent *filteredEvent);
 
 signals:
     /**

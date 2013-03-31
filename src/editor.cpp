@@ -40,6 +40,8 @@ public:
         layout->addWidget(aceView);
         layout->setMargin(0);
 
+        aceView->installEventFilter(parent);
+
         connect(this, &EditorPrivate::linesChanged,
                 parent, &Editor::linesChanged);
 
@@ -121,10 +123,35 @@ Editor::Editor(QWidget *parent) :
     d(new EditorPrivate(this))
 {
     d->startAceWidget();
+    d->executeJavaScript("editor.focus()");
 }
 
 Editor::~Editor()
 {
+}
+
+void Editor::copy()
+{
+    QString text;
+    text = d->executeJavaScript("editor.getCopyText()").toString();
+    if (!text.isEmpty()) {
+        QClipboard *clip = qApp->clipboard();
+        clip->setText(text, QClipboard::Clipboard);
+    }
+}
+
+void Editor::paste()
+{
+    QClipboard *clip = qApp->clipboard();
+    QString text = clip->text(QClipboard::Clipboard);
+    if (!text.isEmpty())
+        d->executeJavaScript(QString("editor.insert('%1')").arg(text)).toString();
+}
+
+void Editor::cut()
+{
+    copy();
+    d->executeJavaScript("editor.remove(editor.getSelectionRange())");
 }
 
 int Editor::lines() const
@@ -250,6 +277,35 @@ void Editor::setTheme(const QString &name, const QUrl &url)
             "editor.setTheme('ace/theme/"+name+"');";
 
     d->executeJavaScript(request);
+}
+
+bool Editor::eventFilter(QObject *object, QEvent *filteredEvent)
+{
+    Q_UNUSED(object);
+
+    // Key press filters
+    if (filteredEvent->type() == QEvent::KeyPress) {
+        QKeyEvent *event = (QKeyEvent*)filteredEvent;
+
+        int mod = event->modifiers();
+        int key = event->key();
+
+        if (mod == Qt::ControlModifier && key == Qt::Key_C) {
+            copy();
+            return true;
+        }
+
+        if (mod == Qt::ControlModifier && key == Qt::Key_V) {
+            paste();
+            return true;
+        }
+
+        if (mod == Qt::ControlModifier && key == Qt::Key_X) {
+            cut();
+            return true;
+        }
+    }
+    return false;
 }
 
 } // namespace Novile
