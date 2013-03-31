@@ -75,6 +75,22 @@ public:
             executeJavaScript(listeners.readAll());
     }
 
+    /**
+     * @brief Escape symbols for JavaScript calls
+     * @param text non-escaped code
+     * @return escaped code (ready for js call)
+     */
+    QString escape(const QString &text)
+    {
+        QString escaped = text;
+        escaped.replace("\n", "\\n");
+        escaped.replace("\t", "\\t");
+        escaped.replace("\'", "\\'");
+        escaped.replace("\"", "\\\"");
+
+        return escaped;
+    }
+
 public slots:
     /**
      * @brief Provider for @see linesChanged()

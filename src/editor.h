@@ -91,16 +91,70 @@ public:
     void cut();
 
     /**
+     * @brief Short way of @see cursorPosition
+     * @return line, on which cursor is located
+     */
+    int currentLine();
+
+    /**
+     * @brief Short way of @see cursorPosition
+     * @return column, on which cursor is located
+     */
+    int currentColumn();
+
+    /**
+     * @brief Current position of the cursor in the document
+     * @param row coordinates: line
+     * @param column coordinates: position from the left
+     */
+    void cursorPosition(int *row, int *column);
+
+    /**
+     * @brief Set position of the cursor in the document
+     * @param row coordinates: line
+     * @param column coordinates: position from the left
+     */
+    void setCursorPosition(int row, int column);
+
+    /**
      * @brief Number of source lines
      * @return lines in the source
      */
     int lines() const;
 
     /**
+     * @brief Number of symbols in the @p row
+     * @param row
+     * @return number of screenrows in a wrapped line
+     */
+    int lineLength(int row) const;
+
+    /**
+     * @brief Information stored int the @p row
+     * @param row line, chosen for iteration
+     * @return string with line contents
+     */
+    QString line(int row) const;
+
+    /**
      * @brief Changes cursor position (=row) to set
      * @param lineNumber new cursor's row
      */
     void gotoLine(int lineNumber) const;
+
+    /**
+     * @brief Insert @p text at the current cursor position
+     * @param text information to be inserted
+     */
+    void insert(const QString &text);
+
+    /**
+     * @brief Insert @p text at the @p row and @p column
+     * @param row coordinates: line
+     * @param column coordinates: position from the left
+     * @param text information to be inserted
+     */
+    void insert(int row, int column, const QString &text);
 
     /**
      * @brief Source code from editor
@@ -113,6 +167,17 @@ public:
      * @param newText new source code
      */
     void setText(const QString &newText);
+
+    /**
+     * @brief Get selected text from the editor
+     * @return selected texts
+     */
+    QString selectedText() const;
+
+    /**
+     * @brief Remove selected text from the editor
+     */
+    void removeSelectedText();
 
     /**
      * @brief Can we edit or not?

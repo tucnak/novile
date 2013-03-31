@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
     editor.setTheme(Editor::ThemeTextMate);
     editor.hidePrintMargin();
     editor.setFontSize(13);
+    editor.setText("Hello, world!");
+    editor.insert(0, 9, "|");
 
     return app.exec();
 }

@@ -32,8 +32,7 @@ Editor::~Editor()
 
 void Editor::copy()
 {
-    QString text;
-    text = d->executeJavaScript("editor.getCopyText()").toString();
+    QString text = selectedText();
     if (!text.isEmpty()) {
         QClipboard *clip = qApp->clipboard();
         clip->setText(text, QClipboard::Clipboard);
@@ -51,7 +50,32 @@ void Editor::paste()
 void Editor::cut()
 {
     copy();
-    d->executeJavaScript("editor.remove(editor.getSelectionRange())");
+    removeSelectedText();
+}
+
+void Editor::cursorPosition(int *row, int *column)
+{
+    *row = currentLine();
+    *column = currentColumn();
+}
+
+void Editor::setCursorPosition(int row, int column)
+{
+    if (lines() > row && lineLength(row) >= column) {
+        d->executeJavaScript(
+                    QString("editor.moveCursorTo(%1, %2)").arg(row).arg(column)
+        );
+    }
+}
+
+int Editor::currentLine()
+{
+    return d->executeJavaScript("editor.getCursorPosition().row").toInt();
+}
+
+int Editor::currentColumn()
+{
+    return d->executeJavaScript("editor.getCursorPosition().column").toInt();
 }
 
 int Editor::lines() const
@@ -59,20 +83,75 @@ int Editor::lines() const
     return d->executeJavaScript("property('lines')").toInt();
 }
 
+QString Editor::line(int row) const
+{
+    return d->executeJavaScript(
+                QString("editor.getSession().getLine(%1)").arg(row)
+           ).toString();
+}
+
+int Editor::lineLength(int row) const
+{
+    return line(row).length();
+}
+
 void Editor::gotoLine(int lineNumber) const
 {
     d->executeJavaScript("editor.gotoLine("+QString::number(lineNumber)+")");
 }
 
+void Editor::insert(const QString &text)
+{
+    d->executeJavaScript(QString("editor.insert('%1')").arg(d->escape(text)));
+}
+
+void Editor::insert(int row, int column, const QString &text)
+{
+    if (lines() > row && lineLength(row) > column) {
+        int previousLine, previousColumn;
+        cursorPosition(&previousLine, &previousColumn);
+
+        setCursorPosition(row, column);
+        insert(text);
+
+        // Imaging, that we had this string:
+        // hello, novile edit|or! ("|" - cursor pos)
+        // then, if we insert smth before cursor pos
+        // e.g. after "hello, ", we insert "cool "
+        // we have another string:
+        // hello, cool novile| editor! ("|" - cursor pos)
+        // so, we need to move it 5 sumbols right,
+        // which equals text.size()
+        if (row == previousLine) {
+            if (previousColumn >= column)
+                previousColumn += text.size();
+        }
+
+        setCursorPosition(previousLine, previousColumn);
+    }
+}
+
 QString Editor::text() const
 {
-    return d->executeJavaScript("property('text')").toString();
+    return d->executeJavaScript("editor.getSession().getValue()").toString();
 }
 
 void Editor::setText(const QString &newText)
 {
-    d->executeJavaScript("editor.setValue('"+newText+"')");
-    d->executeJavaScript("editor.selection.clearSelection()");
+    const QString request = "editor.getSession().setValue('%1')";
+    d->executeJavaScript(request.arg(d->escape(newText)));
+    int lastLine = lines()-1;
+    setCursorPosition(lastLine, lineLength(lastLine));
+}
+
+QString Editor::selectedText() const
+{
+    return d->executeJavaScript("editor.getCopyText()").toString();
+}
+
+void Editor::removeSelectedText()
+{
+    d->executeJavaScript("editor.remove(editor.getSelectionRange())");
 }
 
 bool Editor::isReadOnly() const
@@ -109,8 +188,8 @@ int Editor::fontSize()
 
 void Editor::setFontSize(int px)
 {
-    d->executeJavaScript("document.getElementById('editor').style.fontSize='" +
-                         QString::number(px) + "px';");
+    const QString request = "document.getElementById('editor').style.fontSize='%1px'";
+    d->executeJavaScript(request.arg(px));
 }
 
 void Editor::setHighlightMode(HighlightMode mode)
@@ -149,10 +228,9 @@ void Editor::setHighlightMode(HighlightMode mode)
 void Editor::setHighlightMode(const QString &name, const QUrl &url)
 {
     const QString request = ""
-            "$.getScript('"+url.toString()+"');"
-            "editor.getSession().setMode('ace/mode/"+name+"');";
-
-    d->executeJavaScript(request);
+            "$.getScript('%1');"
+            "editor.getSession().setMode('ace/mode/%2');";
+    d->executeJavaScript(request.arg(url.toString()).arg(name));
 }
 
 void Editor::setTheme(Theme theme)
@@ -173,10 +251,9 @@ void Editor::setTheme(Theme theme)
 void Editor::setTheme(const QString &name, const QUrl &url)
 {
     const QString request = ""
-            "$.getScript('"+url.toString()+"');"
-            "editor.setTheme('ace/theme/"+name+"');";
-
-    d->executeJavaScript(request);
+            "$.getScript('%1');"
+            "editor.setTheme('ace/theme/%2');";
+    d->executeJavaScript(request.arg(url.toString()).arg(name));
 }
 
 bool Editor::eventFilter(QObject *object, QEvent *filteredEvent)
