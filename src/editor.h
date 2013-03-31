@@ -91,14 +91,16 @@ public:
     void cut();
 
     /**
-     * @brief Short way of @see cursorPosition
+     * @brief Short way of cursorPosition()
      * @return line, on which cursor is located
+     * @see cursorPosition
      */
     int currentLine();
 
     /**
-     * @brief Short way of @see cursorPosition
+     * @brief Short way of cursorPosition()
      * @return column, on which cursor is located
+     * @see cursorPosition
      */
     int currentColumn();
 
@@ -215,7 +217,8 @@ public:
 
     /**
      * @brief Set default syntax highlighter lexer
-     * @param mode lexer entry from @see HighlightMode
+     * @param mode lexer entry from the HighlightMode
+     * @see HighlightMode
      */
     void setHighlightMode(HighlightMode mode);
 
@@ -228,7 +231,8 @@ public:
 
     /**
      * @brief Set default editor theme
-     * @param theme entry from @see Theme
+     * @param theme entry from the Theme
+     * @see Theme
      */
     void setTheme(Theme theme);
 

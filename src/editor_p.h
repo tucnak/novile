@@ -11,7 +11,8 @@ namespace Novile
 /**
  * @brief The EditorPrivate class
  *
- * EditorPrivate class represents low-level wrapper for Ace editor and background of @see Editor
+ * EditorPrivate class represents low-level wrapper for Ace editor and background of the Editor
+ * @see Editor
  */
 
 class EditorPrivate: public QObject
@@ -93,8 +94,9 @@ public:
 
 public slots:
     /**
-     * @brief Provider for @see linesChanged()
+     * @brief Provider for linesChanged()
      * @param lines new number of rows
+     * @see linesChanged()
      */
     void onLinesChanged(int lines)
     {
@@ -102,7 +104,8 @@ public slots:
     }
 
     /**
-     * @brief Provider for @see textChanged()
+     * @brief Provider for textChanged()
+     * @see textChanged()
      */
     void onTextChanged()
     {
@@ -111,12 +114,14 @@ public slots:
 
 signals:
     /**
-     * @brief Intermediate signal for @see Editor::linesChanged()
+     * @brief Intermediate signal for Editor::linesChanged()
+     * @see Editor::linesChanged()
      */
     void linesChanged(int);
 
     /**
-     * @brief Intermediate signal for @see Editor::textChanged()
+     * @brief Intermediate signal for Editor::textChanged()
+     * @see Editor::textChanged()
      */
     void textChanged();
 
