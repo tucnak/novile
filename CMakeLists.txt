@@ -12,8 +12,8 @@ cmake_minimum_required(VERSION 2.8.8)
 
 # Versions are set = major.minor.patch
 set(NOVILE_VERSION_MAJOR "0")
-set(NOVILE_VERSION_MINOR "0")
-set(NOVILE_VERSION_PATCH "1")
+set(NOVILE_VERSION_MINOR "1")
+set(NOVILE_VERSION_PATCH "0")
 set(NOVILE_VERSION ${NOVILE_VERSION_MAJOR}.${NOVILE_VERSION_MINOR}.${NOVILE_VERSION_PATCH})
 
 project(novile)
