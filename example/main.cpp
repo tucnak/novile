@@ -8,6 +8,7 @@
  *
  */
 
+#include <QtCore>
 #include <QApplication>
 #include "editor.h"
 #include "novile_debug.h"
@@ -19,15 +20,13 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     Editor editor;
-    editor.setWindowTitle("Novile Demonstration");
+    editor.setWindowTitle("Novile Editor Demo");
     editor.setGeometry(100, 50, 1000, 600);
     editor.show();
     editor.setHighlightMode(Editor::ModeCpp);
     editor.setTheme(Editor::ThemeTextMate);
     editor.hidePrintMargin();
     editor.setFontSize(13);
-    editor.setText("Hello, world!");
-    editor.insert(0, 9, "|");
 
     return app.exec();
 }

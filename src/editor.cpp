@@ -44,7 +44,7 @@ void Editor::paste()
     QClipboard *clip = qApp->clipboard();
     QString text = clip->text(QClipboard::Clipboard);
     if (!text.isEmpty())
-        d->executeJavaScript(QString("editor.insert('%1')").arg(text)).toString();
+        d->executeJavaScript(QString("editor.insert('%1')").arg(d->escape(text))).toString();
 }
 
 void Editor::cut()
