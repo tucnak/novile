@@ -15,9 +15,18 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5WebKitWidgets REQUIRED)
 
-set(EXAMPLE_SOURCES main.cpp)
+set(EXAMPLE_SOURCES main.cpp mainwindow.cpp)
+set(EXAMPLE_HEADERS mainwindow.h)
 
-add_executable(example ${EXAMPLE_SOURCES})
+qt5_add_resources(EXAMPLE_RCC_SRC example.qrc)
+qt5_wrap_ui(EXAMPLE_UIC_HDR mainwindow.ui)
+
+add_executable(example ${EXAMPLE_SOURCES}
+                       ${EXAMPLE_HEADERS}
+                       ${EXAMPLE_RCC_SRC}
+                       ${EXAMPLE_UIC_HDR}
+)
+
 target_link_libraries(example novile)
-include_directories(${CMAKE_SOURCE_DIR}/src)
 qt5_use_modules(example WebKitWidgets)
+include_directories(${CMAKE_SOURCE_DIR}/src)

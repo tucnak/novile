@@ -31,6 +31,12 @@ class NOVILE_EXPORT Editor : public QWidget
     Q_PROPERTY(int lines READ lines NOTIFY linesChanged)
     Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize)
     Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
+    Q_PROPERTY(bool highlightActiveLine READ isActiveLineHighlighted WRITE setActiveLineHighlighted)
+    Q_PROPERTY(bool highlightActiveWord READ isHighlightSelectedWord WRITE setHighlightSelectedWord)
+    Q_PROPERTY(bool indentationShown READ isIndentationShown WRITE setIndentationShown)
+    Q_PROPERTY(bool invisiblesShown READ isInvisiblesShown WRITE setInvisiblesShown)
+    Q_PROPERTY(bool fadeFoldMarker READ isFadeFoldMarker WRITE setFadeFoldMarker)
+    Q_PROPERTY(bool gutterShown READ isGutterShown WRITE setGutterShown)
 public:
     /**
      * @brief Default highlight lexers
@@ -65,7 +71,7 @@ public:
         /// Monokai-style theme
         ThemeMonokai,
         /// Textmate-style theme
-        ThemeTextMate
+        ThemeTextmate
     };
 
     /**
@@ -159,6 +165,78 @@ public:
     void insert(int row, int column, const QString &text);
 
     /**
+     * @brief Are indentation guides shown?
+     * @return are they?
+     */
+    bool isIndentationShown();
+
+    /**
+     * @brief Set indentation lines guides shown or not
+     * @param is are they?
+     */
+    void setIndentationShown(bool is);
+
+    /**
+     * @brief Are invisible symbols shown?
+     * @return are they?
+     */
+    bool isInvisiblesShown();
+
+    /**
+     * @brief Set invisible symbols shown or not
+     * @param is are they?
+     */
+    void setInvisiblesShown(bool is);
+
+    /**
+     * @brief Is left margin (line numbers) shown?
+     * @return is it?
+     */
+    bool isGutterShown();
+
+    /**
+     * @brief Set left margin (line numbers) shown
+     * @param is it?
+     */
+    void setGutterShown(bool is);
+
+    /**
+     * @brief Fold widgets can be visible always or only on hover
+     * @return are they?
+     */
+    bool isFadeFoldMarker();
+
+    /**
+     * @brief Set fold widgets fade or not?
+     * @param is are they?
+     */
+    void setFadeFoldMarker(bool is);
+
+    /**
+     * @brief Current word can be highlighted with a rect
+     * @return is it?
+     */
+    bool isHighlightSelectedWord();
+
+    /**
+     * @brief Set current word can be highlighted with a rect
+     * @param is it?
+     */
+    void setHighlightSelectedWord(bool is);
+
+    /**
+     * @brief Current line can be highlighted with a caret
+     * @return is it?
+     */
+    bool isActiveLineHighlighted();
+
+    /**
+     * @brief Set current line to be highlighted
+     * @param is highlighted or not?
+     */
+    void setActiveLineHighlighted(bool is);
+
+    /**
      * @brief Source code from editor
      * @return source code
      */
@@ -220,7 +298,7 @@ public:
      * @param mode lexer entry from the HighlightMode
      * @see HighlightMode
      */
-    void setHighlightMode(HighlightMode mode);
+    void setHighlightMode(int mode);
 
     /**
      * @brief Set specific syntax highlighter lexer
@@ -234,7 +312,7 @@ public:
      * @param theme entry from the Theme
      * @see Theme
      */
-    void setTheme(Theme theme);
+    void setTheme(int theme);
 
     /**
      * @brief Set specific editor theme

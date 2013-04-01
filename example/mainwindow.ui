@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>450</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="example.qrc">
+    <normaloff>:/img/icon.png</normaloff>:/img/icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horisontalLayout">
+    <property name="margin">
+     <number>5</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="mainLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinimumSize</enum>
+        </property>
+        <item>
+         <widget class="QComboBox" name="selectDocument"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="selectMode">
+          <item>
+           <property name="text">
+            <string>C++</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>CSS</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>HTML</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>JavaScript</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Pascal</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>PHP</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Python</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Ruby</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>XML</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="selectTheme">
+          <item>
+           <property name="text">
+            <string>Ambiance</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Monokai</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Textmate</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkHighlightActive">
+          <property name="text">
+           <string>Highlight Active Line</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkShowInvisibles">
+          <property name="text">
+           <string>Show Invisibles</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkShowGutter">
+          <property name="text">
+           <string>Show Gutter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkShowPrintMargin">
+          <property name="text">
+           <string>Show Print Margin</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkHighlightSelected">
+          <property name="text">
+           <string>Highlight selected word</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkFadeFold">
+          <property name="text">
+           <string>Fade Fold Widgets</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkShowIndent">
+          <property name="text">
+           <string>Show Indent Guides</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkReadOnly">
+          <property name="text">
+           <string>Read-only</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="controlLayout">
+          <item>
+           <widget class="QPushButton" name="pushAboutNovile">
+            <property name="text">
+             <string>About Novile...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushAboutQt">
+            <property name="text">
+             <string>About Qt...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="example.qrc"/>
+ </resources>
+ <connections/>
+</ui>

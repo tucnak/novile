@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/icon.png</file>
+        <file>documents/angular.js</file>
+        <file>documents/blueprint.css</file>
+        <file>documents/conway-ui.xml</file>
+        <file>documents/emmet.py</file>
+        <file>documents/facebook.php</file>
+        <file>documents/freepascal.pas</file>
+        <file>documents/github.html</file>
+        <file>documents/marble.cpp</file>
+        <file>documents/rails.rb</file>
+    </qresource>
+</RCC>

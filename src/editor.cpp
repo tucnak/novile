@@ -131,6 +131,72 @@ void Editor::insert(int row, int column, const QString &text)
     }
 }
 
+bool Editor::isIndentationShown()
+{
+    return d->executeJavaScript("editor.getDisplayIndentGuides()").toBool();
+}
+
+void Editor::setIndentationShown(bool is)
+{
+    QString request = "editor.setDisplayIndentGuides(%1)";
+    d->executeJavaScript(request.arg(is));
+}
+
+bool Editor::isInvisiblesShown()
+{
+    return d->executeJavaScript("editor.renderer.getShowInvisibles()").toBool();
+}
+
+void Editor::setInvisiblesShown(bool is)
+{
+    QString request = "editor.renderer.setShowInvisibles(%1)";
+    d->executeJavaScript(request.arg(is));
+}
+
+bool Editor::isGutterShown()
+{
+    return d->executeJavaScript("editor.renderer.getShowGutter()").toBool();
+}
+
+void Editor::setGutterShown(bool is)
+{
+    QString request = "editor.renderer.setShowGutter(%1)";
+    d->executeJavaScript(request.arg(is));
+}
+
+bool Editor::isFadeFoldMarker()
+{
+    return d->executeJavaScript("editor.getFadeFoldWidgets()").toBool();
+}
+
+void Editor::setFadeFoldMarker(bool is)
+{
+    QString request = "editor.setFadeFoldWidgets(%1)";
+    d->executeJavaScript(request.arg(is));
+}
+
+bool Editor::isHighlightSelectedWord()
+{
+    return d->executeJavaScript("editor.getHighlightSelectedWord()").toBool();
+}
+
+void Editor::setHighlightSelectedWord(bool is)
+{
+    QString request = "editor.setHighlightSelectedWord(%1)";
+    d->executeJavaScript(request.arg(is));
+}
+
+bool Editor::isActiveLineHighlighted()
+{
+    return d->executeJavaScript("editor.getHighlightActiveLine()").toBool();
+}
+
+void Editor::setActiveLineHighlighted(bool is)
+{
+    QString request = "editor.setHighlightActiveLine(%1)";
+    d->executeJavaScript(request.arg(is));
+}
+
 QString Editor::text() const
 {
     return d->executeJavaScript("editor.getSession().getValue()").toString();
@@ -192,7 +258,7 @@ void Editor::setFontSize(int px)
     d->executeJavaScript(request.arg(px));
 }
 
-void Editor::setHighlightMode(HighlightMode mode)
+void Editor::setHighlightMode(int mode)
 {
     switch(mode) {
     case ModeCpp:
@@ -233,7 +299,7 @@ void Editor::setHighlightMode(const QString &name, const QUrl &url)
     d->executeJavaScript(request.arg(url.toString()).arg(name));
 }
 
-void Editor::setTheme(Theme theme)
+void Editor::setTheme(int theme)
 {
     switch(theme) {
     case ThemeAmbiance:
@@ -242,7 +308,7 @@ void Editor::setTheme(Theme theme)
     case ThemeMonokai:
         setTheme(QString("monokai"), QUrl("qrc:/ace/theme-monokai.js"));
         return;
-    case ThemeTextMate:
+    case ThemeTextmate:
         setTheme(QString("textmate"), QUrl("qrc:/ace/theme-textmate.js"));
         return;
     }
