@@ -17,16 +17,22 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    // Establishers for Editor interaction
+    void establishBaseConnects();
+    void establishEventConnects();
+
+    // About windows
     void aboutNovile();
     void aboutQt();
 
+    // Define additional information
     void initExampleFiles();
     void setupStartValues();
 
+    // GUI controls reactions
     void updateDocument(int index);
     void updateMode(int index);
     void updateTheme(int index);
-
     void updateHighlightActive(int checked);
     void updateHighlightSelected(int checked);
     void updateShowPrintMargin(int checked);
@@ -35,7 +41,7 @@ public:
     void updateShowIndent(int checked);
     void updateReadOnly(int checked);
     void updateFadeFold(int checked);
-    
+
 private:
     Ui::MainWindow *ui;
     Novile::Editor *editor;

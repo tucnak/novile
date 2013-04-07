@@ -20,7 +20,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainLayout->insertWidget(1, editor, 1);
 
     initExampleFiles();
+    establishBaseConnects();
+    setupStartValues();
+}
 
+void MainWindow::establishBaseConnects()
+{
     connect(ui->pushAboutNovile, &QPushButton::clicked,
             this, &MainWindow::aboutNovile);
 
@@ -65,8 +70,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->checkReadOnly, &QCheckBox::stateChanged,
             this, &MainWindow::updateReadOnly);
-
-    setupStartValues();
 }
 
 void MainWindow::aboutNovile()

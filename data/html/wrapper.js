@@ -21,8 +21,10 @@ function property(param, value) {
 property("lines", 1);
 property("text", "");
 
-// If document changed
-editor.on('change', function() {
+var timerid = -1;
+
+// All necessary calls here
+function handleEvents() {
     var newLines = editor.session.getLength();
     if (newLines != property("lines")) {
         property("lines", newLines);
@@ -34,4 +36,18 @@ editor.on('change', function() {
         property("text", newText);
         Novile.onTextChanged();
     }
+
+    clearTimeout(timerid);
+    timerid = -1;
+}
+
+// On each change with the editor
+// Some events haven't been finished yet
+// Thats why we schedule it
+editor.on('change', function() {
+    if (timerid > 0) {
+        clearTimeout(timerid);
+    }
+
+    timerid = setTimeout(handleEvents, 50);
 });
