@@ -43,10 +43,10 @@ public:
         aceView->installEventFilter(parent);
 
 		connect(this, SIGNAL(linesChanged(int)),
-				parent, SLOT(linesChanged(int)));
+				parent, SIGNAL(linesChanged(int)));
 
 		connect(this, SIGNAL(textChanged()),
-				parent, SLOT(textChanged()));
+				parent, SIGNAL(textChanged()));
     }
 
     ~EditorPrivate()

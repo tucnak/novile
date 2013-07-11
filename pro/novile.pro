@@ -22,4 +22,6 @@ RESOURCES = \
 	../data/shared.qrc
 
 OTHER_FILES += \
-    ../deploy/make_deb.py
+    ../deploy/make_deb.py \
+    ../data/html/wrapper.js \
+    ../data/html/ace.html
