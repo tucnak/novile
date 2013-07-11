@@ -3,6 +3,8 @@ TARGET = novile
 TEMPLATE = lib
 DESTDIR = ../lib
 
+VERSION = 0.5.0
+
 DEFINES += \
 	NOVILE_MAKEDLL \
 	NOVILE_QT4
@@ -18,3 +20,6 @@ HEADERS = \
 	
 RESOURCES = \
 	../data/shared.qrc
+
+OTHER_FILES += \
+    ../deploy/make_deb.py
