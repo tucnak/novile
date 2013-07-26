@@ -2,7 +2,14 @@
 #define EDITOR_P_H
 
 #include <QtCore>
+#include <QVBoxLayout>
+
+#ifdef NOVILE_QT4
+#include <QtWebKit>
+#else
 #include <QtWebKitWidgets>
+#endif
+
 #include "editor.h"
 
 namespace Novile
@@ -35,11 +42,11 @@ public:
 
         aceView->installEventFilter(parent);
 
-        connect(this, &EditorPrivate::linesChanged,
-                parent, &Editor::linesChanged);
+		connect(this, SIGNAL(linesChanged(int)),
+				parent, SIGNAL(linesChanged(int)));
 
-        connect(this, &EditorPrivate::textChanged,
-                parent, &Editor::textChanged);
+		connect(this, SIGNAL(textChanged()),
+				parent, SIGNAL(textChanged()));
     }
 
     ~EditorPrivate()
@@ -62,9 +69,11 @@ public:
     void startAceWidget()
     {
         QEventLoop loop(parent);
-        QObject::connect(aceView, &QWebView::loadFinished,
-                         &loop, &QEventLoop::quit);
-        aceView->load(QUrl("qrc:/html/ace.html"));
+
+		QObject::connect(aceView, SIGNAL(loadFinished(bool)),
+				&loop, SLOT(quit()));
+
+		aceView->load(QUrl("qrc:/html/ace.html"));
         loop.exec();
 
         // Wrapper (data/wrapper.js)
