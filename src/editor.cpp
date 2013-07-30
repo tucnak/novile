@@ -9,8 +9,15 @@
  */
 
 #include <QtCore>
-#include <QVBoxLayout>
+#include <QApplication>
+#include <QClipboard>
+
+#ifdef NOVILE_QT4
+#include <QtWebKit>
+#else
 #include <QtWebKitWidgets>
+#endif
+
 #include "novile_debug.h"
 #include "editor.h"
 #include "editor_p.h"
@@ -34,14 +41,14 @@ void Editor::copy()
 {
     QString text = selectedText();
     if (!text.isEmpty()) {
-        QClipboard *clip = qApp->clipboard();
+        QClipboard *clip = QApplication::clipboard();
         clip->setText(text, QClipboard::Clipboard);
     }
 }
 
 void Editor::paste()
 {
-    QClipboard *clip = qApp->clipboard();
+    QClipboard *clip = QApplication::clipboard();
     QString text = clip->text(QClipboard::Clipboard);
     if (!text.isEmpty())
         d->executeJavaScript(QString("editor.insert('%1')").arg(d->escape(text))).toString();
