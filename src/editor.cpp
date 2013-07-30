@@ -41,15 +41,15 @@ void Editor::copy()
 {
     QString text = selectedText();
     if (!text.isEmpty()) {
-		QClipboard *clip = QApplication::clipboard();
-		clip->setText(text, QClipboard::Clipboard);
-	}
+        QClipboard *clip = QApplication::clipboard();
+        clip->setText(text, QClipboard::Clipboard);
+    }
 }
 
 void Editor::paste()
 {
-	QClipboard *clip = QApplication::clipboard();
-	QString text = clip->text(QClipboard::Clipboard);
+    QClipboard *clip = QApplication::clipboard();
+    QString text = clip->text(QClipboard::Clipboard);
     if (!text.isEmpty())
         d->executeJavaScript(QString("editor.insert('%1')").arg(d->escape(text))).toString();
 }

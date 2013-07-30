@@ -42,11 +42,11 @@ public:
 
         aceView->installEventFilter(parent);
 
-		connect(this, SIGNAL(linesChanged(int)),
-				parent, SIGNAL(linesChanged(int)));
+        connect(this, SIGNAL(linesChanged(int)),
+                parent, SIGNAL(linesChanged(int)));
 
-		connect(this, SIGNAL(textChanged()),
-				parent, SIGNAL(textChanged()));
+        connect(this, SIGNAL(textChanged()),
+                parent, SIGNAL(textChanged()));
     }
 
     ~EditorPrivate()
@@ -70,10 +70,10 @@ public:
     {
         QEventLoop loop(parent);
 
-		QObject::connect(aceView, SIGNAL(loadFinished(bool)),
-				&loop, SLOT(quit()));
+        QObject::connect(aceView, SIGNAL(loadFinished(bool)),
+                &loop, SLOT(quit()));
 
-		aceView->load(QUrl("qrc:/html/ace.html"));
+        aceView->load(QUrl("qrc:/html/ace.html"));
         loop.exec();
 
         // Wrapper (data/wrapper.js)
