@@ -12,6 +12,7 @@
 #define EDITOR_H
 
 #include <QWidget>
+#include <QUrl>
 #include "novile_export.h"
 
 namespace Novile
