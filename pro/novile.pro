@@ -1,4 +1,5 @@
 QT = core gui webkit
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webkitwidgets
 TARGET = novile
 TEMPLATE = lib
 DESTDIR = ../lib
@@ -6,8 +7,7 @@ DESTDIR = ../lib
 VERSION = 0.5.0
 
 DEFINES += \
-	NOVILE_MAKEDLL \
-	NOVILE_QT4
+        NOVILE_MAKEDLL
 
 SOURCES = \
 	../src/editor.cpp
