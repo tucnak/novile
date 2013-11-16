@@ -47,7 +47,7 @@ public:
         ModeCpp = 0,
         /// CSS markup language
         ModeCss,
-        /// HTML markup language
+        /// HTML markup
         ModeHtml,
         /// JavaScript scripting language
         ModeJavaScript,
@@ -60,7 +60,49 @@ public:
         /// Ruby programming language
         ModeRuby,
         /// XML markup language
-        ModeXml
+        ModeXml,
+        /// Action Script scripting language
+        ModeActionScript,
+        /// Ada programming language
+        ModeAda,
+        /// Assembly programming language
+        ModeAssemblyX86,
+        /// Windows Batch scripting language
+        ModeBatch,
+        /// Clojure programming language
+        ModeClojure,
+        /// CoffeeScript scripting language
+        ModeCoffeeScript,
+        /// C# programming language
+        ModeCSharp,
+        /// Erlang programming language
+        ModeErlang,
+        /// Go programming language
+        ModeGo,
+        /// Haskell programming language
+        ModeHaskell,
+        /// Java programming language
+        ModeJava,
+        /// JSON markup language
+        ModeJson,
+        /// LaTeX markup language
+        ModeLatex,
+        /// Lisp programming language
+        ModeLisp,
+        /// Lua programming language
+        ModeLua,
+        /// Configuration files for make utility
+        ModeMakefile,
+        /// Markdown makup language
+        ModeMarkdown,
+        /// SQL query language
+        ModeSQL,
+        /// MS Powershell scripting language
+        ModePowershell,
+        /// Scala programming language
+        ModeScala,
+        /// SH scripting language
+        ModeSh
     };
 
     /**
@@ -72,7 +114,23 @@ public:
         /// Monokai-style theme
         ThemeMonokai,
         /// Textmate-style theme
-        ThemeTextmate
+        ThemeTextmate,
+        /// Chaos theme
+        ThemeChaos,
+        /// Clouds Midnight theme
+        ThemeCloudsMidnight,
+        /// Eclipse-style theme
+        ThemeEclipse,
+        /// Theme used by GitHub source viewers
+        ThemeGitHub,
+        /// Solarized Dark theme
+        ThemeSolarizedDark,
+        /// Tomorrow Night Bright theme
+        ThemeTomorrowNightBright,
+        /// Twilight theme
+        ThemeTwilight,
+        /// Vibrant Ink theme
+        ThemeVibrantInk
     };
 
     /**
@@ -309,6 +367,13 @@ public:
     void setHighlightMode(const QString &name, const QUrl &url);
 
     /**
+     * @brief Set specific syntax highlighter lexer
+     * @param name string, set into "ace/mode/$name"
+     * @param url lexer javascript source url
+     */
+    void setHighlightMode(const QString &name);
+
+    /**
      * @brief Set default editor theme
      * @param theme entry from the Theme
      * @see Theme
@@ -321,6 +386,13 @@ public:
      * @param url theme javascript source url
      */
     void setTheme(const QString &name, const QUrl &url);
+
+    /**
+     * @brief Set specific editor theme
+     * @param name string, set into "ace/theme/$name"
+     * @param url theme javascript source url
+     */
+    void setTheme(const QString &name);
 
 protected:
     bool eventFilter(QObject *object, QEvent *filteredEvent);
