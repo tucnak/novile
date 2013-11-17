@@ -16,5 +16,34 @@
         <file alias="jquery/latest.js">jquery/jquery-1.9.1.min.js</file>
         <file>html/ace.html</file>
         <file>html/wrapper.js</file>
+        <file>ace/mode-actionscript.js</file>
+        <file>ace/mode-ada.js</file>
+        <file>ace/mode-assembly_x86.js</file>
+        <file>ace/mode-batchfile.js</file>
+        <file>ace/mode-clojure.js</file>
+        <file>ace/mode-coffee.js</file>
+        <file>ace/mode-csharp.js</file>
+        <file>ace/mode-erlang.js</file>
+        <file>ace/mode-golang.js</file>
+        <file>ace/mode-haskell.js</file>
+        <file>ace/mode-java.js</file>
+        <file>ace/mode-json.js</file>
+        <file>ace/mode-latex.js</file>
+        <file>ace/mode-lisp.js</file>
+        <file>ace/mode-lua.js</file>
+        <file>ace/mode-makefile.js</file>
+        <file>ace/mode-markdown.js</file>
+        <file>ace/mode-powershell.js</file>
+        <file>ace/mode-scala.js</file>
+        <file>ace/mode-sh.js</file>
+        <file>ace/theme-chaos.js</file>
+        <file>ace/theme-clouds_midnight.js</file>
+        <file>ace/theme-eclipse.js</file>
+        <file>ace/theme-github.js</file>
+        <file>ace/theme-solarized_dark.js</file>
+        <file>ace/theme-tomorrow_night_bright.js</file>
+        <file>ace/theme-twilight.js</file>
+        <file>ace/theme-vibrant_ink.js</file>
+        <file>ace/mode-sql.js</file>
     </qresource>
 </RCC>

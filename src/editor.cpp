@@ -268,31 +268,94 @@ void Editor::setHighlightMode(int mode)
 {
     switch(mode) {
     case ModeCpp:
-        setHighlightMode(QString("c_cpp"), QUrl("qrc:/ace/mode-c_cpp.js"));
+        setHighlightMode("c_cpp");
         return;
     case ModeCss:
-        setHighlightMode(QString("css"), QUrl("qrc:/ace/mode-css.js"));
+        setHighlightMode("css");
         return;
     case ModeHtml:
-        setHighlightMode(QString("html"), QUrl("qrc:/ace/mode-html.js"));
+        setHighlightMode("html");
         return;
     case ModeJavaScript:
-        setHighlightMode(QString("javascript"), QUrl("qrc:/ace/mode-javascript.js"));
+        setHighlightMode("javascript");
         return;
     case ModePascal:
-        setHighlightMode(QString("pascal"), QUrl("qrc:/ace/mode-pascal.js"));
+        setHighlightMode("pascal");
         return;
     case ModePhp:
-        setHighlightMode(QString("php"), QUrl("qrc:/ace/mode-php.js"));
+        setHighlightMode("php");
         return;
     case ModePython:
-        setHighlightMode(QString("python"), QUrl("qrc:/ace/mode-python.js"));
+        setHighlightMode("python");
         return;
     case ModeRuby:
-        setHighlightMode(QString("ruby"), QUrl("qrc:/ace/mode-ruby.js"));
+        setHighlightMode("ruby");
         return;
     case ModeXml:
-        setHighlightMode(QString("xml"), QUrl("qrc:/ace/mode-xml.js"));
+        setHighlightMode("xml");
+        return;
+    case ModeActionScript:
+        setHighlightMode("actionscript");
+        return;
+    case ModeAda:
+        setHighlightMode("ada");
+        return;
+    case ModeAssemblyX86:
+        setHighlightMode("assembly_x86");
+        return;
+    case ModeBatch:
+        setHighlightMode("batchfile");
+        return;
+    case ModeClojure:
+        setHighlightMode("clojure");
+        return;
+    case ModeCoffeeScript:
+        setHighlightMode("coffee");
+        return;
+    case ModeCSharp:
+        setHighlightMode("csharp");
+        return;
+    case ModeErlang:
+        setHighlightMode("erlang");
+        return;
+    case ModeGo:
+        setHighlightMode("golang");
+        return;
+    case ModeHaskell:
+        setHighlightMode("haskell");
+        return;
+    case ModeJava:
+        setHighlightMode("java");
+        return;
+    case ModeJson:
+        setHighlightMode("json");
+        return;
+    case ModeLatex:
+        setHighlightMode("latex");
+        return;
+    case ModeLisp:
+        setHighlightMode("lisp");
+        return;
+    case ModeLua:
+        setHighlightMode("lua");
+        return;
+    case ModeMakefile:
+        setHighlightMode("makefile");
+        return;
+    case ModeMarkdown:
+        setHighlightMode("markdown");
+        return;
+    case ModePowershell:
+        setHighlightMode("powershell");
+        return;
+    case ModeScala:
+        setHighlightMode("scala");
+        return;
+    case ModeSh:
+        setHighlightMode("sh");
+        return;
+    case ModeSQL:
+        setHighlightMode("sql");
         return;
     }
 }
@@ -305,17 +368,49 @@ void Editor::setHighlightMode(const QString &name, const QUrl &url)
     d->executeJavaScript(request.arg(url.toString()).arg(name));
 }
 
+void Editor::setHighlightMode(const QString &name)
+{
+    const QString request = ""
+            "$.getScript('%1');"
+            "editor.getSession().setMode('ace/mode/%2');";
+    d->executeJavaScript(request.arg("qrc:/ace/mode-"+name+".js").arg(name));
+}
+
 void Editor::setTheme(int theme)
 {
     switch(theme) {
     case ThemeAmbiance:
-        setTheme(QString("ambiance"), QUrl("qrc:/ace/theme-ambiance.js"));
+        setTheme("ambiance");
         return;
     case ThemeMonokai:
-        setTheme(QString("monokai"), QUrl("qrc:/ace/theme-monokai.js"));
+        setTheme("monokai");
         return;
     case ThemeTextmate:
-        setTheme(QString("textmate"), QUrl("qrc:/ace/theme-textmate.js"));
+        setTheme("textmate");
+        return;
+    case ThemeChaos:
+        setTheme("chaos");
+        return;
+    case ThemeCloudsMidnight:
+        setTheme("clouds_midnight");
+        return;
+    case ThemeEclipse:
+        setTheme("eclipse");
+        return;
+    case ThemeGitHub:
+        setTheme("github");
+        return;
+    case ThemeSolarizedDark:
+        setTheme("solarized_dark");
+        return;
+    case ThemeTomorrowNightBright:
+        setTheme("tomorrow_midnight_bright");
+        return;
+    case ThemeTwilight:
+        setTheme("twilight");
+        return;
+    case ThemeVibrantInk:
+        setTheme("vibrant_ink");
         return;
     }
 }
@@ -326,6 +421,14 @@ void Editor::setTheme(const QString &name, const QUrl &url)
             "$.getScript('%1');"
             "editor.setTheme('ace/theme/%2');";
     d->executeJavaScript(request.arg(url.toString()).arg(name));
+}
+
+void Editor::setTheme(const QString &name)
+{
+    const QString request = ""
+            "$.getScript('%1');"
+            "editor.setTheme('ace/theme/%2');";
+    d->executeJavaScript(request.arg("qrc:/ace/theme-"+name+".js").arg(name));
 }
 
 bool Editor::eventFilter(QObject *object, QEvent *filteredEvent)
