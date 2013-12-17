@@ -11,6 +11,7 @@
 #include <QtCore>
 #include <QApplication>
 #include <QClipboard>
+#include <QShortcut>
 
 #include <QtWebKit>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
@@ -30,6 +31,8 @@ Editor::Editor(QWidget *parent) :
 {
     d->startAceWidget();
     d->executeJavaScript("editor.focus()");
+
+    new QShortcut(QKeySequence("Ctrl+A"), this, SLOT(selectAll()));
 }
 
 Editor::~Editor()
@@ -57,6 +60,11 @@ void Editor::cut()
 {
     copy();
     removeSelectedText();
+}
+
+void Editor::selectAll()
+{
+    d->executeJavaScript("editor.selectAll()");
 }
 
 void Editor::cursorPosition(int *row, int *column)

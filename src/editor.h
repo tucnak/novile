@@ -141,21 +141,6 @@ public:
     ~Editor();
 
     /**
-     * @brief Copy selected text to the buffer
-     */
-    void copy();
-
-    /**
-     * @brief Paste text from the buffer to the editor
-     */
-    void paste();
-
-    /**
-     * @brief Cut selected text to the buffer
-     */
-    void cut();
-
-    /**
      * @brief Short way of cursorPosition()
      * @return line, on which cursor is located
      * @see cursorPosition
@@ -175,13 +160,6 @@ public:
      * @param column coordinates: position from the left
      */
     void cursorPosition(int *row, int *column);
-
-    /**
-     * @brief Set position of the cursor in the document
-     * @param row coordinates: line
-     * @param column coordinates: position from the left
-     */
-    void setCursorPosition(int row, int column);
 
     /**
      * @brief Number of source lines
@@ -204,6 +182,94 @@ public:
     QString line(int row) const;
 
     /**
+     * @brief Are indentation guides shown?
+     * @return are they?
+     */
+    bool isIndentationShown();
+
+    /**
+     * @brief Are invisible symbols shown?
+     * @return are they?
+     */
+    bool isInvisiblesShown();
+
+    /**
+     * @brief Is left margin (line numbers) shown?
+     * @return is it?
+     */
+    bool isGutterShown();
+
+    /**
+     * @brief Fold widgets can be visible always or only on hover
+     * @return are they?
+     */
+    bool isFadeFoldMarker();
+
+    /**
+     * @brief Current word can be highlighted with a rect
+     * @return is it?
+     */
+    bool isHighlightSelectedWord();
+
+    /**
+     * @brief Current line can be highlighted with a caret
+     * @return is it?
+     */
+    bool isActiveLineHighlighted();
+
+    /**
+     * @brief Source code from editor
+     * @return source code
+     */
+    QString text() const;
+
+    /**
+     * @brief Get selected text from the editor
+     * @return selected texts
+     */
+    QString selectedText() const;
+
+    /**
+     * @brief Can we edit or not?
+     * @return can or not
+     */
+    bool isReadOnly() const;
+
+    /**
+     * @brief Font size of the source text
+     * @return size in pixels
+     */
+    int fontSize();
+
+public slots:
+    /**
+     * @brief Copy selected text to the buffer
+     */
+    void copy();
+
+    /**
+     * @brief Paste text from the buffer to the editor
+     */
+    void paste();
+
+    /**
+     * @brief Cut selected text to the buffer
+     */
+    void cut();
+
+    /**
+     * @brief Selects the whole text in the editor
+     */
+    void selectAll();
+
+    /**
+     * @brief Set position of the cursor in the document
+     * @param row coordinates: line
+     * @param column coordinates: position from the left
+     */
+    void setCursorPosition(int row, int column);
+
+    /**
      * @brief Changes cursor position (=row) to set
      * @param lineNumber new cursor's row
      */
@@ -224,22 +290,10 @@ public:
     void insert(int row, int column, const QString &text);
 
     /**
-     * @brief Are indentation guides shown?
-     * @return are they?
-     */
-    bool isIndentationShown();
-
-    /**
      * @brief Set indentation lines guides shown or not
      * @param is are they?
      */
     void setIndentationShown(bool is);
-
-    /**
-     * @brief Are invisible symbols shown?
-     * @return are they?
-     */
-    bool isInvisiblesShown();
 
     /**
      * @brief Set invisible symbols shown or not
@@ -248,22 +302,10 @@ public:
     void setInvisiblesShown(bool is);
 
     /**
-     * @brief Is left margin (line numbers) shown?
-     * @return is it?
-     */
-    bool isGutterShown();
-
-    /**
      * @brief Set left margin (line numbers) shown
      * @param is it?
      */
     void setGutterShown(bool is);
-
-    /**
-     * @brief Fold widgets can be visible always or only on hover
-     * @return are they?
-     */
-    bool isFadeFoldMarker();
 
     /**
      * @brief Set fold widgets fade or not?
@@ -272,22 +314,10 @@ public:
     void setFadeFoldMarker(bool is);
 
     /**
-     * @brief Current word can be highlighted with a rect
-     * @return is it?
-     */
-    bool isHighlightSelectedWord();
-
-    /**
      * @brief Set current word can be highlighted with a rect
      * @param is it?
      */
     void setHighlightSelectedWord(bool is);
-
-    /**
-     * @brief Current line can be highlighted with a caret
-     * @return is it?
-     */
-    bool isActiveLineHighlighted();
 
     /**
      * @brief Set current line to be highlighted
@@ -296,33 +326,15 @@ public:
     void setActiveLineHighlighted(bool is);
 
     /**
-     * @brief Source code from editor
-     * @return source code
-     */
-    QString text() const;
-
-    /**
      * @brief Set source code for editor
      * @param newText new source code
      */
     void setText(const QString &newText);
 
     /**
-     * @brief Get selected text from the editor
-     * @return selected texts
-     */
-    QString selectedText() const;
-
-    /**
      * @brief Remove selected text from the editor
      */
     void removeSelectedText();
-
-    /**
-     * @brief Can we edit or not?
-     * @return can or not
-     */
-    bool isReadOnly() const;
 
     /**
      * @brief Allow edit or not
@@ -339,12 +351,6 @@ public:
      * @brief Hide print margin (semi-transparent line at right)
      */
     void hidePrintMargin();
-
-    /**
-     * @brief Font size of the source text
-     * @return size in pixels
-     */
-    int fontSize();
 
     /**
      * @brief Set font size in pixels
