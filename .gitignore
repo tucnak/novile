@@ -20,4 +20,8 @@ Makefile
 *-build-*
 /build*
 /lib
+/doc
 /deploy/*.deb
+
+# System
+.DS_Store

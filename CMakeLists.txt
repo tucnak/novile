@@ -54,5 +54,8 @@ if(BUILD_DOCS)
                           COMMENT "Generating API documentation with Doxygen" VERBATIM
         )
         message(STATUS "Doxygen API documentation is going to be created")
+        install(DIRECTORY ${CMAKE_SOURCE_DIR}/doc
+                DESTINATION ${CMAKE_INSTALL_PREFIX}
+        )
     endif(DOXYGEN_FOUND)
 endif(BUILD_DOCS)

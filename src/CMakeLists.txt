@@ -12,16 +12,17 @@ set(NOVILE_SOURCES
     editor.cpp
 )
 
-set(NOVILE_HEADERS
+set(NOVILE_PUBLIC_HEADER
     editor.h
     novile_export.h
-    novile_debug.h
-    editor_p.h
+)
+
+set(NOVILE_PUBLIC_INCLUDE
+    ../include/NovileEditor
 )
 
 qt5_add_resources(NOVILE_RCC_SRC ../data/shared.qrc)
 add_library(novile SHARED ${NOVILE_SOURCES}
-                          ${NOVILE_HEADERS}
                           ${NOVILE_RCC_SRC}
                           ../data/shared.qrc
 )
@@ -29,10 +30,14 @@ qt5_use_modules(novile WebKitWidgets)
 
 set_target_properties(novile PROPERTIES
     DEFINE_SYMBOL NOVILE_MAKEDLL
-    PUBLIC_HEADER "${NOVILE_HEADERS}"
+    PUBLIC_HEADER "${NOVILE_PUBLIC_HEADER}"
 )
 
 install(TARGETS novile
     LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+)
+
+install(FILES ${NOVILE_PUBLIC_INCLUDE}
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/include
 )
