@@ -92,6 +92,8 @@ public:
     QString escape(const QString &text)
     {
         QString escaped = text;
+        escaped.replace("\r\n", "\n");
+        escaped.replace("\r", "\n");
         escaped.replace("\n", "\\n");
         escaped.replace("\t", "\\t");
         escaped.replace("\'", "\\'");
